@@ -1,0 +1,64 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 30vw;
+  width: 100%;
+  margin: auto;
+  padding: 2vh;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.gender-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.gender-label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+fieldset.fieldset-style {
+  padding: 1rem;
+  border-radius: 0.3rem;
+  display: flex;
+  gap: 0.5rem;
+  position: relative;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+legend {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+button {
+  align-self: center;
+  width: 50%;
+  min-width: 8rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
