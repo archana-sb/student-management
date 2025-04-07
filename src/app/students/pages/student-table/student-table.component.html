@@ -1,72 +1,81 @@
-<mat-card *ngIf="students.length === 0" class="table-container">
-  <div class="empty-state">
-    <p>No students available.</p>
-    <button mat-raised-button color="accent" [routerLink]="['../form']">
-      <mat-icon>person_add</mat-icon>
-      Add Student
-    </button>
-  </div>
-</mat-card>
-
-<table
-  mat-table
-  [dataSource]="students"
-  class="mat-elevation-z8"
-  *ngIf="students.length > 0"
->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let student">{{ student.name }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="age">
-    <th mat-header-cell *matHeaderCellDef>Age</th>
-    <td mat-cell *matCellDef="let student">{{ student.age }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="course">
-    <th mat-header-cell *matHeaderCellDef>Course</th>
-    <td mat-cell *matCellDef="let student">{{ student.course }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="gender">
-    <th mat-header-cell *matHeaderCellDef>Gender</th>
-    <td mat-cell *matCellDef="let student">{{ student.gender }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="skills">
-    <th mat-header-cell *matHeaderCellDef>Skills</th>
-    <td mat-cell *matCellDef="let student">
-      {{ student.skills.join(", ") }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th class="text-center" mat-header-cell *matHeaderCellDef>Actions</th>
-    <td class="text-center" mat-cell *matCellDef="let student">
-      <button
-        mat-button
-        color="primary"
-        routerLink="/form"
-        (click)="onEdit(student)"
-      >
-        Edit
+<ng-container *ngIf="students$ | async as students">
+  <mat-card *ngIf="students.length == 0" class="table-container">
+    <div class="empty-state">
+      <p>No students available.</p>
+      <button mat-raised-button color="accent" [routerLink]="['../form']">
+        <mat-icon>person_add</mat-icon>
+        Add Student
       </button>
-      <button mat-button color="warn" (click)="onDelete(student.id!)">
-        Delete
-      </button>
-    </td>
-  </ng-container>
+    </div>
+  </mat-card>
 
-  <tr
-    mat-header-row
-    *matHeaderRowDef="['name', 'age', 'course', 'gender', 'skills', 'actions']"
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="
-      let row;
-      columns: ['name', 'age', 'course', 'gender', 'skills', 'actions']
-    "
-  ></tr>
-</table>
+  <table
+    mat-table
+    [dataSource]="students"
+    class="mat-elevation-z8"
+    *ngIf="students.length > 0"
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let student">{{ student.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>Age</th>
+      <td mat-cell *matCellDef="let student">{{ student.age }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+      <th mat-header-cell *matHeaderCellDef>Course</th>
+      <td mat-cell *matCellDef="let student">{{ student.course }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef>Gender</th>
+      <td mat-cell *matCellDef="let student">{{ student.gender }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="skills">
+      <th mat-header-cell *matHeaderCellDef>Skills</th>
+      <td mat-cell *matCellDef="let student">
+        {{ student.skills.join(", ") }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th class="text-center" mat-header-cell *matHeaderCellDef>Actions</th>
+      <td class="text-center" mat-cell *matCellDef="let student">
+        <button
+          mat-button
+          color="primary"
+          routerLink="/form"
+          (click)="onEdit(student)"
+        >
+          Edit
+        </button>
+        <button mat-button color="warn" (click)="onDelete(student.id!)">
+          Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="[
+        'name',
+        'age',
+        'course',
+        'gender',
+        'skills',
+        'actions'
+      ]"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: ['name', 'age', 'course', 'gender', 'skills', 'actions']
+      "
+    ></tr>
+  </table>
+</ng-container>

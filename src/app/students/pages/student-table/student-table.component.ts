@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StudentService } from '../../services/student.service';
 import { Student } from '../../models/student.model';
 import { Router } from '@angular/router';
@@ -12,19 +12,15 @@ import { StudentModule } from '../../../shared/modules/student.module';
   templateUrl: './student-table.component.html',
   styleUrl: './student-table.component.scss',
 })
-export class StudentTableComponent implements OnInit {
-  students: Student[] = [];
-
+export class StudentTableComponent {
   constructor(
     private readonly studentService: StudentService,
     private readonly toastService: ToastService,
     private readonly router: Router
   ) {}
 
-  ngOnInit() {
-    this.studentService.getStudents().subscribe((students) => {
-      this.students = students;
-    });
+  get students$() {
+    return this.studentService.getStudents();
   }
 
   onDelete(id: number) {
